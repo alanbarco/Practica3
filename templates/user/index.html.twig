@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Usuario | Inicio{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #9aaebd;">
+    <span class="navbar-brand mb-0 h1">Residente</span>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+        <a class="nav-link" href="{{path('app_residente_incidente')}}">Reportar incidente</a>
+        <a class="nav-link text-light" href="{{path('app_logout')}}"><span class="bi bi-box-arrow-right mr-1"></span>Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+<h1>Incidentes Reportados</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID Incidente</th>
+      <th>Descripción</th>
+      <th>Estado</th>
+      <th>Solución</th>
+      <th>Observación</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for incidente in lista %}
+    <tr>
+      <td>{{incidente.idIncidente}}</td>
+      <td>{{incidente.idTipo.descripcion}}</td>
+      <td>{{incidente.estadoIncidente}}</td>
+      <td>{{incidente.solucion}}</td>
+      <td>{{incidente.observacion}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

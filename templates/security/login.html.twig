@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block body %}
+<section >
+    {% if error %}
+        <div class="alert alert-danger">Cuenta no existente.</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="mb-3">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+    {% endif %}
+
+<div class="container mt-5 pt-5">
+    <div class="row">
+      <div class="col-12 col-sm-7 col-md-6 m-auto">
+        <div class="card border-0 shadow">
+          <div class="card-body">
+           <h1 class="text-center font-weight-bold">Iniciar sesión</h1>
+            <form method="post">
+                <input placeholder="Correo electrónico" type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control my-4 py-2"  autocomplete="email" required autofocus>
+                <input placeholder="Contraseña" type="password" name="password" id="inputPassword" class="form-control my-4 py-2"  autocomplete="current-password" required>
+                
+                <input type="hidden" name="_csrf_token"
+                    value="{{ csrf_token('authenticate') }}"
+                >
+                <button class="btn btn-block btn-info" type="submit">
+                    Ingresar
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

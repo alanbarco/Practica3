@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Gerente | Inicio{% endblock %}
+
+{% block body %}
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #9aaebd;">
+    <span class="navbar-brand mb-0 h1">Gerente</span>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav ml-auto">
+      <a class="nav-link" href="{{path('app_register')}}">Registrar Residente</a>
+        <a class="nav-link text-light " href="{{path('app_logout')}}"><span class="bi bi-box-arrow-right mr-1"></span>Cerrar sesión</a>
+      </div>
+    </div>
+  </nav>
+<h1>Incidentes Reportados</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID Residente</th>
+            <th>Tipo de incidente</th>
+            <th>Estado</th>
+            <th>Solucion</th>
+            <th>Observacion</th>
+            <th>Costo total($)</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for incidente in listaIncidentes %}
+        <tr>
+            <td>{{incidente.idUsuario.idUsuario}}</td>
+            <td>{{incidente.idTipo.descripcion}}</td>
+            <td>{{incidente.estadoIncidente}}</td>
+            <td>{{incidente.solucion}}</td>
+            <td>{{incidente.observacion}}</td>
+            <td>{{incidente.costo}}</td>
+            <td>
+            {% if(incidente.estadoIncidente == "Finalizado") %}
+                <a href="{{path('app_incidente_edit_gerente',{id:incidente.idIncidente})}}" class="btn btn-warning">Revisar</a>
+            {% endif %}
+                <a href="{{path('app_incidente_delete',{id:incidente.idIncidente})}}" class="btn btn-danger">Eliminar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
